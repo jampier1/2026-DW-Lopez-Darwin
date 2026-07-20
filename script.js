@@ -157,9 +157,13 @@ const servicios = [
 ];
 
 const listaServicios = document.getElementById("listaServicios");
+const spinnerServicios = document.getElementById("spinnerServicios");
+const modalServicioCuerpo = document.getElementById("modalServicioCuerpo");
+const modalServicio = new bootstrap.Modal(document.getElementById("modalServicio"));
 
 // Recorre el arreglo "servicios" (estructura repetitiva) y arma las
-// tarjetas dinámicamente, evitando repetir HTML a mano.
+// tarjetas dinámicamente, evitando repetir HTML a mano. Cada tarjeta
+// incluye un botón "Ver más" que abre el modal con el detalle completo.
 function renderServicios() {
 
     listaServicios.innerHTML = "";
@@ -173,7 +177,7 @@ function renderServicios() {
         tarjeta.className = "card h-100";
 
         const cuerpo = document.createElement("div");
-        cuerpo.className = "card-body";
+        cuerpo.className = "card-body d-flex flex-column";
 
         const titulo = document.createElement("h6");
         titulo.className = "card-title";
@@ -183,12 +187,46 @@ function renderServicios() {
         texto.className = "card-text small text-muted";
         texto.textContent = servicio.descripcion;
 
+        const botonVerMas = document.createElement("button");
+        botonVerMas.type = "button";
+        botonVerMas.className = "btn btn-primary btn-sm mt-auto";
+        botonVerMas.textContent = "Ver más";
+
+        botonVerMas.addEventListener("click", function () {
+            modalServicioCuerpo.innerHTML = "";
+
+            const detalleTitulo = document.createElement("h5");
+            detalleTitulo.textContent = servicio.nombre;
+
+            const detalleTexto = document.createElement("p");
+            detalleTexto.textContent = servicio.descripcion;
+
+            modalServicioCuerpo.appendChild(detalleTitulo);
+            modalServicioCuerpo.appendChild(detalleTexto);
+
+            modalServicio.show();
+        });
+
         cuerpo.appendChild(titulo);
         cuerpo.appendChild(texto);
+        cuerpo.appendChild(botonVerMas);
         tarjeta.appendChild(cuerpo);
         columna.appendChild(tarjeta);
         listaServicios.appendChild(columna);
     });
+}
+
+// Simula un pequeño proceso de carga (por ejemplo, una consulta a un
+// servidor) mostrando el spinner de Bootstrap antes de renderizar.
+function cargarServicios() {
+    spinnerServicios.classList.remove("d-none");
+    listaServicios.classList.add("d-none");
+
+    setTimeout(function () {
+        renderServicios();
+        spinnerServicios.classList.add("d-none");
+        listaServicios.classList.remove("d-none");
+    }, 800);
 }
 
 
@@ -206,6 +244,14 @@ const categoria = document.getElementById("categoria");
 const mensaje = document.getElementById("mensaje");
 const listaRegistros = document.getElementById("listaRegistros");
 const total = document.getElementById("total");
+
+const nombreRegistroEliminar = document.getElementById("nombreRegistroEliminar");
+const btnConfirmarEliminar = document.getElementById("btnConfirmarEliminar");
+const modalConfirmarEliminar = new bootstrap.Modal(document.getElementById("modalConfirmarEliminar"));
+
+// Guarda temporalmente el id del registro que se quiere eliminar mientras
+// se espera la confirmación del usuario en el modal.
+let idRegistroPendienteEliminar = null;
 
 const LONGITUD_MIN_NOMBRE = 3;
 const LONGITUD_MIN_DESCRIPCION = 10;
@@ -271,11 +317,14 @@ function mostrarMensaje(texto, tipo) {
     }, 4000);
 }
 
-// Crea el elemento de tarjeta para un registro individual
+// Crea el elemento de tarjeta (en su columna) para un registro individual
 function crearTarjetaRegistro(registro) {
 
+    const columna = document.createElement("div");
+    columna.className = "col-md-6 mb-3";
+
     const tarjeta = document.createElement("div");
-    tarjeta.className = "card p-3 mb-3";
+    tarjeta.className = "card p-3";
 
     const titulo = document.createElement("h5");
     titulo.textContent = registro.nombre;
@@ -290,20 +339,36 @@ function crearTarjetaRegistro(registro) {
     botonEliminar.textContent = "Eliminar";
     botonEliminar.className = "btn btn-danger";
 
+    // En lugar de borrar directamente, se abre el modal de confirmación.
     botonEliminar.addEventListener("click", function () {
-        registros = registros.filter(function (r) {
-            return r.id !== registro.id;
-        });
-        renderRegistros();
+        idRegistroPendienteEliminar = registro.id;
+        nombreRegistroEliminar.textContent = registro.nombre;
+        modalConfirmarEliminar.show();
     });
 
     tarjeta.appendChild(titulo);
     tarjeta.appendChild(texto);
     tarjeta.appendChild(tipo);
     tarjeta.appendChild(botonEliminar);
+    columna.appendChild(tarjeta);
 
-    return tarjeta;
+    return columna;
 }
+
+// Se ejecuta solo cuando el usuario confirma en el modal.
+btnConfirmarEliminar.addEventListener("click", function () {
+
+    if (idRegistroPendienteEliminar === null) return;
+
+    registros = registros.filter(function (r) {
+        return r.id !== idRegistroPendienteEliminar;
+    });
+
+    idRegistroPendienteEliminar = null;
+    renderRegistros();
+    modalConfirmarEliminar.hide();
+    mostrarMensaje("Registro eliminado correctamente.", "exito");
+});
 
 // Recorre el arreglo "registros" y dibuja todas las tarjetas.
 // Muestra un mensaje distinto según el estado de los datos (vacío o con registros).
@@ -312,10 +377,15 @@ function renderRegistros() {
     listaRegistros.innerHTML = "";
 
     if (registros.length === 0) {
+        const columnaVacia = document.createElement("div");
+        columnaVacia.className = "col-12";
+
         const vacio = document.createElement("p");
         vacio.className = "text-muted";
         vacio.textContent = "Aún no hay servicios registrados.";
-        listaRegistros.appendChild(vacio);
+
+        columnaVacia.appendChild(vacio);
+        listaRegistros.appendChild(columnaVacia);
     } else {
         registros.forEach(function (registro) {
             listaRegistros.appendChild(crearTarjetaRegistro(registro));
@@ -331,6 +401,10 @@ function limpiarValidaciones() {
         campo.classList.remove("is-valid", "is-invalid");
     });
 }
+
+const btnAgregarRegistro = document.getElementById("btnAgregarRegistro");
+const spinnerRegistro = document.getElementById("spinnerRegistro");
+const textoBtnRegistro = document.getElementById("textoBtnRegistro");
 
 // Validación en tiempo real mientras el usuario escribe
 nombre.addEventListener("input", validarNombre);
@@ -358,18 +432,31 @@ formulario.addEventListener("submit", function (event) {
         return;
     }
 
-    registros.push({
-        id: siguienteId++,
-        nombre: nombre.value.trim(),
-        descripcion: descripcion.value.trim(),
-        categoria: categoria.value
-    });
+    // Simula un breve proceso de guardado mostrando el spinner en el botón.
+    btnAgregarRegistro.disabled = true;
+    spinnerRegistro.classList.remove("d-none");
+    textoBtnRegistro.textContent = "Guardando...";
 
-    renderRegistros();
-    mostrarMensaje("Registro agregado correctamente.", "exito");
+    setTimeout(function () {
 
-    formulario.reset();
-    limpiarValidaciones();
+        registros.push({
+            id: siguienteId++,
+            nombre: nombre.value.trim(),
+            descripcion: descripcion.value.trim(),
+            categoria: categoria.value
+        });
+
+        renderRegistros();
+        mostrarMensaje("Registro agregado correctamente.", "exito");
+
+        formulario.reset();
+        limpiarValidaciones();
+
+        btnAgregarRegistro.disabled = false;
+        spinnerRegistro.classList.add("d-none");
+        textoBtnRegistro.textContent = "Agregar Servicio";
+
+    }, 700);
 
 });
 
@@ -378,5 +465,5 @@ formulario.addEventListener("submit", function (event) {
    RENDERIZADO INICIAL AL CARGAR LA PÁGINA
    ============================================================ */
 
-renderServicios();
+cargarServicios();
 renderRegistros();
