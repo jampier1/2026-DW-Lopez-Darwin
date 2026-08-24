@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}
+Solicitudes - BanGYE Digital
+{% endblock %}
+
+{% block content %}
+
+<section class="container my-5">
+
+    <div class="text-center mb-5">
+
+        <h2 class="fw-bold">
+            Gestión de Solicitudes
+        </h2>
+
+        <p class="lead">
+            Consulta y seguimiento de las solicitudes realizadas por los usuarios
+            de {{ informacion.nombre }}.
+        </p>
+
+    </div>
+
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h4 class="mb-4">
+                Solicitudes registradas
+            </h4>
+
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+                            <th>N.º</th>
+                            <th>Cliente</th>
+                            <th>Tipo de solicitud</th>
+                            <th>Asunto</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for solicitud in solicitudes %}
+
+                        <tr>
+
+                            <td>
+                                {{ solicitud.id }}
+                            </td>
+
+                            <td>
+                                {{ solicitud.cliente }}
+                            </td>
+
+                            <td>
+                                {{ solicitud.tipo }}
+                            </td>
+
+                            <td>
+                                {{ solicitud.asunto }}
+                            </td>
+
+                            <td>
+                                {{ solicitud.fecha }}
+                            </td>
+
+                            <td>
+
+                                {% if solicitud.estado == "Atendida" %}
+
+                                    <span class="badge bg-success">
+                                        {{ solicitud.estado }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        {{ solicitud.estado }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

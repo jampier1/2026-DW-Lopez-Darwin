@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+    <div class="container">
+
+        <a class="navbar-brand d-flex align-items-center"
+           href="{{ url_for('inicio') }}">
+
+            <span class="logo-bangye">
+                <i class="bi bi-bank2"></i>
+            </span>
+
+            <span class="nombre-banco">
+                BanGYE Digital
+            </span>
+
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu"
+                aria-controls="menu"
+                aria-expanded="false"
+                aria-label="Abrir menú">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{{ url_for('inicio') }}">
+                        Inicio
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{{ url_for('solicitudes') }}">
+                        Solicitudes
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{{ url_for('cuentas') }}">
+                        Cuentas
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{{ url_for('transferencias') }}">
+                        Transferencias
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="{{ url_for('pagos') }}">
+                        Pagos
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>

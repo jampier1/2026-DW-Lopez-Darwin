@@ -1,0 +1,151 @@
+body{
+    font-family: Helvetica, sans-serif;
+    background-color: #f8f9fa;
+}
+
+header,
+.navbar,
+footer{
+    background-color: #0B1F5B !important;
+}
+
+header{
+    margin: 0;
+}
+
+.navbar{
+    margin: 0;
+    padding: 16px 0;
+    min-height: 82px;
+}
+
+.navbar-brand{
+    color: white !important;
+    font-size: 1.7rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-bangye{
+    width: 58px;
+    height: 58px;
+    border: 3px solid #7fd3c6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255,255,255,0.08);
+    box-shadow: 0 0 0 4px rgba(127,211,198,0.15);
+    flex-shrink: 0;
+}
+
+.logo-bangye i{
+    font-size: 2rem;
+    color: white;
+}
+
+.nombre-banco{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    letter-spacing: 0.3px;
+}
+
+.nombre-banco > span{
+    color: #7fd3c6;
+}
+
+.nombre-banco small{
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+.navbar-brand:hover{
+    color: #7fd3c6 !important;
+}
+
+#inicio{
+    background: rgba(255,255,255,0.92);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-top: 30px;
+}
+
+.btn-primary{
+    background-color: #0B1F5B !important;
+    border-color: #0B1F5B !important;
+}
+
+.btn-primary:hover{
+    background-color: #142f80 !important;
+    border-color: #142f80 !important;
+}
+
+#quienes p{
+    text-align: justify;
+}
+
+.card{
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    height: 100%;
+}
+
+.tarjeta-servicio{
+    min-height: 190px;
+    transition: all 0.3s ease;
+}
+
+.tarjeta-servicio:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+aside{
+    background-color: #f1f3f5;
+    padding: 20px;
+    margin: 30px;
+    border-left: 5px solid #0B1F5B;
+    border-radius: 10px;
+}
+
+footer{
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+@media (max-width:768px){
+
+    header h1{
+        font-size: 28px;
+    }
+
+    #inicio{
+        padding: 20px;
+    }
+}
+
+
+.navbar-nav .nav-link {
+    color: white !important;
+    font-weight: 600;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #7fd3c6 !important;
+    transform: scale(1.05);
+}
+
+.navbar-nav .nav-link.active {
+    color: #7fd3c6 !important;
+    border-bottom: 2px solid #7fd3c6;
+}
