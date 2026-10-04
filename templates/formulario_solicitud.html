@@ -1,0 +1,74 @@
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h4 class="mb-4">
+            Registrar nueva solicitud
+        </h4>
+
+        <form method="POST" novalidate>
+
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.nombre.label(class="form-label") }}
+                {{ form.nombre(class="form-control") }}
+
+                {% for error in form.nombre.errors %}
+                    <small class="text-danger">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.correo.label(class="form-label") }}
+                {{ form.correo(class="form-control") }}
+
+                {% for error in form.correo.errors %}
+                    <small class="text-danger">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.tipo_solicitud.label(class="form-label") }}
+                {{ form.tipo_solicitud(class="form-select") }}
+
+                {% for error in form.tipo_solicitud.errors %}
+                    <small class="text-danger">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.asunto.label(class="form-label") }}
+                {{ form.asunto(class="form-control") }}
+
+                {% for error in form.asunto.errors %}
+                    <small class="text-danger">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.mensaje.label(class="form-label") }}
+                {{ form.mensaje(class="form-control", rows="4") }}
+
+                {% for error in form.mensaje.errors %}
+                    <small class="text-danger">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+            </div>
+
+            {{ form.enviar(class="btn btn-primary") }}
+
+        </form>
+
+    </div>
+
+</div>

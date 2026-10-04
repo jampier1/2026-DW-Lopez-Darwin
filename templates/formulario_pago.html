@@ -1,0 +1,64 @@
+<div class="card shadow">
+
+    <div class="card-body">
+
+        <h4 class="mb-4">
+            Registrar nuevo pago
+        </h4>
+
+        <form method="POST" novalidate>
+
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+
+                {{ form.cuenta.label(class="form-label") }}
+
+                {{ form.cuenta(class="form-control") }}
+
+                {% for error in form.cuenta.errors %}
+                    <small class="text-danger">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+
+            </div>
+
+
+            <div class="mb-3">
+
+                {{ form.concepto.label(class="form-label") }}
+
+                {{ form.concepto(class="form-control") }}
+
+                {% for error in form.concepto.errors %}
+                    <small class="text-danger">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+
+            </div>
+
+
+            <div class="mb-3">
+
+                {{ form.monto.label(class="form-label") }}
+
+                {{ form.monto(class="form-control") }}
+
+                {% for error in form.monto.errors %}
+                    <small class="text-danger">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+
+            </div>
+
+
+            {{ form.enviar(class="btn btn-primary") }}
+
+        </form>
+
+    </div>
+
+</div>

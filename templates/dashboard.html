@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Panel de Control</h2>
+            <p class="text-muted mb-0">Bienvenido/a, {{ current_user.usuario }}</p>
+        </div>
+        <span class="badge bg-primary fs-6 px-3 py-2">{{ informacion.nombre }}</span>
+    </div>
+
+    <!-- TARJETAS DE MÉTRICAS -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 h-100 border-start border-primary border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small fw-semibold text-uppercase">Cuentas Registradas</span>
+                            <h2 class="fw-bold my-1 text-primary">{{ total_cuentas }}</h2>
+                            <small class="text-muted">Total en base de datos</small>
+                        </div>
+                        <div class="bg-primary bg-opacity-10 p-3 rounded-circle text-primary">
+                            <i class="bi bi-wallet2 fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 h-100 border-start border-warning border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small fw-semibold text-uppercase">Solicitudes Pendientes</span>
+                            <h2 class="fw-bold my-1 text-warning">{{ solicitudes_pendientes }}</h2>
+                            <small class="text-muted">Requieren atención</small>
+                        </div>
+                        <div class="bg-warning bg-opacity-10 p-3 rounded-circle text-warning">
+                            <i class="bi bi-clock-history fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 h-100 border-start border-success border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small fw-semibold text-uppercase">Estado del Sistema</span>
+                            <h5 class="fw-bold my-2 text-success">Operativo</h5>
+                            <small class="text-muted">Conexión MySQL activa</small>
+                        </div>
+                        <div class="bg-success bg-opacity-10 p-3 rounded-circle text-success">
+                            <i class="bi bi-check-circle fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card border-0 shadow-sm rounded-3 h-100 border-start border-info border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <span class="text-muted small fw-semibold text-uppercase">Horario de Atención</span>
+                            <h6 class="fw-bold my-2 text-dark">{{ informacion.horario }}</h6>
+                            <small class="text-muted">{{ informacion.ciudad }}</small>
+                        </div>
+                        <div class="bg-info bg-opacity-10 p-3 rounded-circle text-info">
+                            <i class="bi bi-building fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACCESOS RÁPIDOS -->
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-header bg-transparent border-0 pt-4 px-4">
+            <h5 class="fw-bold mb-0">Accesos Rápidos</h5>
+        </div>
+        <div class="card-body p-4">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <a href="{{ url_for('cuentas') }}" class="btn btn-outline-primary w-100 py-3 text-start d-flex align-items-center">
+                        <i class="bi bi-card-list fs-4 me-3"></i>
+                        <div>
+                            <div class="fw-bold">Gestión de Cuentas</div>
+                            <small class="text-muted">Ver y crear cuentas</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ url_for('solicitudes') }}" class="btn btn-outline-warning w-100 py-3 text-start d-flex align-items-center text-dark">
+                        <i class="bi bi-file-earmark-text fs-4 me-3 text-warning"></i>
+                        <div>
+                            <div class="fw-bold">Solicitudes</div>
+                            <small class="text-muted">Atender peticiones</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ url_for('transferencias') }}" class="btn btn-outline-success w-100 py-3 text-start d-flex align-items-center">
+                        <i class="bi bi-arrow-left-right fs-4 me-3"></i>
+                        <div>
+                            <div class="fw-bold">Transferencias</div>
+                            <small class="text-muted">Historial de envíos</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ url_for('pagos') }}" class="btn btn-outline-info w-100 py-3 text-start d-flex align-items-center text-dark">
+                        <i class="bi bi-receipt fs-4 me-3 text-info"></i>
+                        <div>
+                            <div class="fw-bold">Pagos</div>
+                            <small class="text-muted">Servicios y tarjetas</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

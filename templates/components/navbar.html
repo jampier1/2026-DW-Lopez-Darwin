@@ -29,7 +29,7 @@
 
         <div class="collapse navbar-collapse" id="menu">
 
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-center">
 
                 <li class="nav-item">
                     <a class="nav-link"
@@ -38,33 +38,69 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{{ url_for('solicitudes') }}">
-                        Solicitudes
-                    </a>
-                </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('dashboard') }}">
+                            Dashboard
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{{ url_for('cuentas') }}">
-                        Cuentas
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('solicitudes') }}">
+                            Solicitudes
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{{ url_for('transferencias') }}">
-                        Transferencias
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('cuentas') }}">
+                            Cuentas
+                        </a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link"
-                       href="{{ url_for('pagos') }}">
-                        Pagos
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('transferencias') }}">
+                            Transferencias
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('pagos') }}">
+                            Pagos
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+                        <span class="navbar-text text-warning fw-bold me-2">
+                            <i class="bi bi-person-circle"></i> {{ current_user.usuario }}
+                        </span>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light btn-sm px-3 ms-lg-1"
+                           href="{{ url_for('logout') }}">
+                            Cerrar Sesión
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ url_for('login') }}">
+                            Iniciar Sesión
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary btn-sm text-white px-3 ms-lg-2"
+                           href="{{ url_for('registro') }}">
+                            Registrarse
+                        </a>
+                    </li>
+                {% endif %}
 
             </ul>
 

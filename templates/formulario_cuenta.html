@@ -1,0 +1,64 @@
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h4 class="mb-4">
+            Registrar nueva cuenta
+        </h4>
+
+        <form method="POST" novalidate>
+
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.numero.label(class="form-label") }}
+                {{ form.numero(class="form-control") }}
+
+                {% for error in form.numero.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.titular.label(class="form-label") }}
+                {{ form.titular(class="form-control") }}
+
+                {% for error in form.titular.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.tipo.label(class="form-label") }}
+                {{ form.tipo(class="form-select") }}
+
+                {% for error in form.tipo.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.descripcion.label(class="form-label") }}
+                {{ form.descripcion(class="form-control", rows="3") }}
+
+                {% for error in form.descripcion.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.estado.label(class="form-label") }}
+                {{ form.estado(class="form-select") }}
+
+                {% for error in form.estado.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            {{ form.enviar(class="btn btn-primary") }}
+
+        </form>
+
+    </div>
+
+</div>

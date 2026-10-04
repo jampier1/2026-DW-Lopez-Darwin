@@ -1,0 +1,55 @@
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h4 class="mb-4">
+            Registrar nueva transferencia
+        </h4>
+
+        <form method="POST" novalidate>
+
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.tipo.label(class="form-label") }}
+                {{ form.tipo(class="form-control") }}
+
+                {% for error in form.tipo.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.origen.label(class="form-label") }}
+                {{ form.origen(class="form-control") }}
+
+                {% for error in form.origen.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.destino.label(class="form-label") }}
+                {{ form.destino(class="form-control") }}
+
+                {% for error in form.destino.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.monto.label(class="form-label") }}
+                {{ form.monto(class="form-control") }}
+
+                {% for error in form.monto.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            {{ form.enviar(class="btn btn-primary") }}
+
+        </form>
+
+    </div>
+
+</div>

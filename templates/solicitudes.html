@@ -21,91 +21,70 @@ Solicitudes - BanGYE Digital
 
     </div>
 
+{% include "formulario_solicitud.html" %}
 
-    <div class="card shadow">
+<div class="card shadow">
 
-        <div class="card-body">
+    <div class="card-body">
 
-            <h4 class="mb-4">
-                Solicitudes registradas
-            </h4>
+        <h4 class="mb-4">
+            Solicitudes registradas
+        </h4>
 
+        <div class="table-responsive">
 
-            <div class="table-responsive">
+            <table class="table table-hover align-middle">
 
-                <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>N.º</th>
+                        <th>Cliente</th>
+                        <th>Tipo de solicitud</th>
+                        <th>Asunto</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
 
-                    <thead class="table-dark">
+                <tbody>
 
-                        <tr>
-                            <th>N.º</th>
-                            <th>Cliente</th>
-                            <th>Tipo de solicitud</th>
-                            <th>Asunto</th>
-                            <th>Fecha</th>
-                            <th>Estado</th>
-                        </tr>
+                    {% for solicitud in solicitudes %}
 
-                    </thead>
+                    <tr>
+                        <td>{{ solicitud.id }}</td>
+                        <td>{{ solicitud.cliente }}</td>
+                        <td>{{ solicitud.tipo }}</td>
+                        <td>{{ solicitud.asunto }}</td>
+                        <td>{{ solicitud.fecha }}</td>
 
+                        <td>
+                            {% if solicitud.estado == "Atendida" %}
 
-                    <tbody>
+                                <span class="badge bg-success">
+                                    {{ solicitud.estado }}
+                                </span>
 
-                        {% for solicitud in solicitudes %}
+                            {% else %}
 
-                        <tr>
+                                <span class="badge bg-secondary">
+                                    {{ solicitud.estado }}
+                                </span>
 
-                            <td>
-                                {{ solicitud.id }}
-                            </td>
+                            {% endif %}
+                        </td>
+                    </tr>
 
-                            <td>
-                                {{ solicitud.cliente }}
-                            </td>
+                    {% endfor %}
 
-                            <td>
-                                {{ solicitud.tipo }}
-                            </td>
+                </tbody>
 
-                            <td>
-                                {{ solicitud.asunto }}
-                            </td>
-
-                            <td>
-                                {{ solicitud.fecha }}
-                            </td>
-
-                            <td>
-
-                                {% if solicitud.estado == "Atendida" %}
-
-                                    <span class="badge bg-success">
-                                        {{ solicitud.estado }}
-                                    </span>
-
-                                {% else %}
-
-                                    <span class="badge bg-secondary">
-                                        {{ solicitud.estado }}
-                                    </span>
-
-                                {% endif %}
-
-                            </td>
-
-                        </tr>
-
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
+            </table>
 
         </div>
 
     </div>
+
+</div>
 
 </section>
 
